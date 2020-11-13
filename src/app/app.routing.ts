@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { HostListener, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 
 import { CollatzComponent } from './components/collatz/collatz.component';
 

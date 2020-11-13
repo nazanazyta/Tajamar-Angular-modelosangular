@@ -1,0 +1,4 @@
+<h1>Cómic: {{ comic.nombre }}</h1>
+<img src="{{ comic.imagen }}" style="width: 150px; height: 150px" />
+<h2>Descripción: {{ comic.descripcion }}</h2>
+<button (click)="ponerFavorito( $event )" style="background-color: green; color: white">Favorito</button>

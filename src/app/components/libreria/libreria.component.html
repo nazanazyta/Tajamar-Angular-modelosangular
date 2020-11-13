@@ -1,0 +1,11 @@
+<h1 style="color: fuchsia">Librería</h1>
+<div *ngIf="favorito != null">
+    <h1>Cómic favorito: <span style="color: blue">{{ favorito.nombre }}</span></h1>
+    <img src="{{ favorito.imagen }}" style="width: 100px; height: 100px" />
+    <h3>Descripción: {{ favorito.descripcion }}</h3>
+    <h2></h2>
+</div>
+<hr />
+<div *ngFor="let comic of comics">
+    <app-comic [comic]="comic" (enviarFavorito)="recibirFavorito( $event )"></app-comic>
+</div>

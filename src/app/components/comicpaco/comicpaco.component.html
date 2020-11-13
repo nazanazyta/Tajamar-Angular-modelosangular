@@ -1,0 +1,5 @@
+<h1 style="color: blue">{{ comic.nombre }}</h1>
+<img src="{{ comic.imagen }}" style="width: 150px; height: 150px" />
+<h2 style="color: blueviolet">{{ comic.descripcion }}</h2>
+<button (click)="marcarFavorito()">Seleccionar favorito</button>
+<button (click)="deleteComic()" style="background-color: red; color: white">Eliminar</button>

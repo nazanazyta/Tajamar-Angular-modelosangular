@@ -1,3 +1,6 @@
 <h1 style="color: red">Listado de modelos Producto</h1>
-
-<h1>Datos: {{ producto.nombre }} {{ producto.precio }}</h1>
+<!-- <h1>Datos: {{ producto.nombre }} {{ producto.precio }}</h1> -->
+<div *ngFor="let prod of productos">
+    <h1>Datos: {{prod.nombre}}, {{prod.precio}}</h1>
+    <img src="{{prod.imagen}}" style="width: 150px; height: 150px" />
+</div>
