@@ -1,11 +1,41 @@
 <h1 style="color: fuchsia">Librería</h1>
+<button (click)="mostrarNuevoFormulario()" style="background-color: blueviolet; color:white">Nuevo Cómic</button>
 <div *ngIf="favorito != null">
     <h1>Cómic favorito: <span style="color: blue">{{ favorito.nombre }}</span></h1>
     <img src="{{ favorito.imagen }}" style="width: 100px; height: 100px" />
     <h3>Descripción: {{ favorito.descripcion }}</h3>
-    <h2></h2>
+    <button (click)="quitarFavorito()" style="background-color: red;">Eliminar</button>
+</div>
+<div *ngIf="edit >= 0">
+    <form #comicForm="ngForm" (ngSubmit)="editarComic()">
+        <h3>Modificar</h3>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="cambio.nombre" /><br />
+        <label for="imagen">Imagen</label>
+        <input type="text" name="imagen" #imagen="ngModel" [(ngModel)]="cambio.imagen" /><br />
+        <label for="desc">Descripción</label>
+        <input type="text" name="desc" #desc="ngModel" [(ngModel)]="cambio.descripcion" /><br />
+        <button [disabled]="!comicForm.valid">Enviar datos</button>
+        <button (click)="cancelar()" style="background-color: red;">Cancelar</button>
+    </form>
+</div>
+<div *ngIf="crear == true">
+    <form #comicNewForm="ngForm" (ngSubmit)="nuevoComic()">
+        <h3>Nuevo Cómic</h3>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" #nombreNew="ngModel" [(ngModel)]="nuevo.nombre" /><br />
+        <label for="imagen">Imagen</label>
+        <input type="text" name="imagen" #imagenNew="ngModel" [(ngModel)]="nuevo.imagen" /><br />
+        <label for="desc">Descripción</label>
+        <input type="text" name="desc" #descNew="ngModel" [(ngModel)]="nuevo.descripcion" /><br />
+        <button [disabled]="!comicNewForm.valid">Enviar datos</button>
+        <button (click)="cancelar()" style="background-color: red;">Cancelar</button>
+    </form>
 </div>
 <hr />
-<div *ngFor="let comic of comics">
-    <app-comic [comic]="comic" (enviarFavorito)="recibirFavorito( $event )"></app-comic>
+<div *ngFor="let comic of comics; let i = index">
+    <app-comic [comic]="comic" [posicion]="i"
+    (enviarFavorito)="recibirFavorito( $event )"
+    (borrarComic)="eliminarComic( $event )"
+    (modificarComic)="mostrarFormulario( $event )"></app-comic>
 </div>

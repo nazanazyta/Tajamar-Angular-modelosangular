@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app.routing';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MenuCollatzComponent } from './components/menucollatz/menucollatz.component';
@@ -33,6 +34,7 @@ import { ComicPacoComponent } from './components/comicpaco/comicpaco.component';
   imports: [
     BrowserModule
     , routing
+    , FormsModule
   ],
   providers: [
     appRoutingProviders

@@ -2,3 +2,5 @@
 <img src="{{ comic.imagen }}" style="width: 150px; height: 150px" />
 <h2>Descripción: {{ comic.descripcion }}</h2>
 <button (click)="ponerFavorito( $event )" style="background-color: green; color: white">Favorito</button>
+<button (click)="eliminarComic()" style="background-color: red; color: white">Eliminar</button>
+<button (click)="editarComic()" style="background-color: blue; color:white">Editar</button>

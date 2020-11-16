@@ -8,6 +8,96 @@ import { Comic } from './../../models/comic';
 export class LibreriaComponent implements OnInit {
   public comics: Array<Comic>;
   public favorito: Comic;
+  public edit: number;
+  public cambio : Comic;
+  public crear: boolean;
+  public nuevo: Comic;
+  // @ViewChild("nombre") nombre: ElementRef;
+
+  recibirFavorito( event ){
+    this.favorito = event;
+    this.edit = -1;
+    this.crear = false;
+  }
+
+  eliminarComic(event) {
+    var index = parseInt(event);
+    if(this.comics[index] == this.favorito){
+      this.favorito = null;
+    }
+    this.comics.splice(index, 1);
+    this.edit = -1;
+    this.crear = false;
+  }
+
+  mostrarFormulario(event){
+    var index = parseInt(event);
+    // console.log(index);
+    // console.log(this.edit);
+    this.edit = index;
+    // console.log(this.edit);
+    this.crear = false;
+    this.cambio.nombre = "";
+    this.cambio.imagen = "";
+    this.cambio.descripcion = "";
+  }
+
+  editarComic(){
+    // console.log(this.cambio.nombre);
+    if(this.cambio.nombre != "" && this.cambio.nombre != " "){
+      this.comics[this.edit].nombre = this.cambio.nombre;
+    }
+    if(this.cambio.imagen != "" && this.cambio.imagen != " "){
+      this.comics[this.edit].imagen = this.cambio.imagen;
+    }
+    if(this.cambio.descripcion != "" && this.cambio.descripcion != " "){
+      this.comics[this.edit].descripcion = this.cambio.descripcion;
+    }
+    // this.comics[this.edit] = this.cambio;
+    // console.log(this.cambio);
+    this.edit = -1;
+    this.crear = false;
+  }
+
+  mostrarNuevoFormulario(){
+    this.crear = true;
+    this.edit = -1;
+    this.nuevo.nombre = "";
+    this.nuevo.imagen = "";
+    this.nuevo.descripcion = "";
+  }
+
+  nuevoComic(){
+    if(this.nuevo.nombre != "" && this.nuevo.nombre != " "){
+      if(this.nuevo.imagen != "" && this.nuevo.imagen != " "){
+        if(this.nuevo.descripcion != "" && this.nuevo.descripcion != " "){
+          var objeto = {
+            nombre: this.nuevo.nombre,
+            imagen: this.nuevo.imagen,
+            descripcion: this.nuevo.descripcion
+          }
+          this.comics.push(objeto);
+          this.crear = false;
+        }else{
+          alert("Falta descripción");
+        }
+      }else{
+        alert("Falta imagen");
+      }
+    }else{
+      alert("Falta nombre");
+    }
+  }
+
+  cancelar() {
+    this.edit = -1;
+    this.crear = false;
+  }
+
+  quitarFavorito() {
+    this.favorito = null;
+  }
+
   constructor() {
     this.comics = [
       new Comic(
@@ -26,10 +116,16 @@ export class LibreriaComponent implements OnInit {
         "Yo soy Groot"
       )
     ];
-  }
-
-  recibirFavorito( event ){
-    this.favorito = event;
+    this.nuevo = {
+      nombre: "",
+      imagen: "",
+      descripcion: ""
+    };
+    this.cambio = {
+      nombre: "",
+      imagen: "",
+      descripcion: ""
+    }
   }
 
   ngOnInit(): void {
